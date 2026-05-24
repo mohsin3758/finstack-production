@@ -1,0 +1,33 @@
+# FinStack API — Docker build context exclusions
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Secrets — NEVER bake into image
+.env
+.env.*
+!.env.example
+
+# Dev/test artifacts
+coverage/
+*.test.js
+*.spec.js
+__tests__/
+jest.config.*
+
+# Logs (created at runtime, not baked in)
+logs/
+*.log
+
+# Upload dir (mounted as volume at runtime)
+uploads/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore

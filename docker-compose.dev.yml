@@ -1,0 +1,25 @@
+# FinStack — Development overrides
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+version: "3.9"
+
+services:
+  api:
+    environment:
+      NODE_ENV: development
+      LOG_LEVEL: debug
+    # Expose API directly for debugging
+    ports:
+      - "3001:3001"
+
+  nginx:
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro   # No SSL in dev
+      - ./frontend/out:/usr/share/nginx/html:ro
+      - api_uploads:/app/uploads:ro
+    ports:
+      - "80:80"
+      # No 443 in dev
+
+  # No worker in dev (run separately: npm run worker)
+  worker:
+    profiles: ["worker"]   # Opt-in only: docker compose --profile worker up

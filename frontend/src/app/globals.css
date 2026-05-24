@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --sidebar-width: 256px;
+    --topbar-height: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans text-gray-900 bg-gray-50 antialiased; }
+  :focus-visible { @apply outline-none ring-2 ring-blue-500 ring-offset-2; }
+}
+
+@layer components {
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.300') transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar       { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
+
+  /* Input base */
+  .input-base {
+    @apply block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm
+           text-gray-900 placeholder:text-gray-400
+           focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500
+           disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500
+           transition-colors duration-150;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+  }
+
+  /* Table */
+  .table-auto thead th {
+    @apply px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide
+           bg-gray-50 border-b border-gray-200;
+  }
+  .table-auto tbody td {
+    @apply px-4 py-3 text-sm text-gray-700 border-b border-gray-100;
+  }
+  .table-auto tbody tr:hover td { @apply bg-blue-50/40; }
+  .table-auto tbody tr:last-child td { @apply border-b-0; }
+
+  /* Sidebar nav link */
+  .nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium
+           text-gray-600 hover:bg-gray-100 hover:text-gray-900
+           transition-colors duration-150 cursor-pointer;
+  }
+  .nav-link.active {
+    @apply bg-blue-50 text-blue-700 hover:bg-blue-50;
+  }
+
+  /* Stats KPI card */
+  .kpi-card {
+    @apply card p-5 flex flex-col gap-1;
+  }
+}
+
+@layer utilities {
+  .text-balance  { text-wrap: balance; }
+  .animate-in    { animation: fadeIn 0.2s ease-out; }
+  .slide-in      { animation: slideDown 0.2s ease-out; }
+}
+
+@keyframes fadeIn    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
